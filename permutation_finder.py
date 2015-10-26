@@ -51,7 +51,7 @@ def main(argv):
                         word_in_string = True
                         for character in word:
                             if character not in row:
-                                print(str(character)+' is not in '+str(row))
+                                # print(str(character)+' is not in '+str(row))
                                 word_in_string = False
                         if word_in_string:
                             current_count = current_count + 1
