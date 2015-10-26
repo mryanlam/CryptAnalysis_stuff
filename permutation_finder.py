@@ -38,7 +38,10 @@ def main(argv):
     current_best_fit_value = 0
     with open(inputfile, "r") as fh:
         full_string = fh.read()
-        for i in range(1, len(full_string)):
+        factors_of_lenth = factors(len(full_string))
+        print(factors_of_lenth)
+        for i in factors_of_lenth:
+            print('testing length '+str(i))
             num_substrings = len(full_string) / i
             j = 0
             current_count = 0
@@ -52,11 +55,15 @@ def main(argv):
                     if word_in_string:
                         current_count = current_count + 1
                 j = j + i
+            print('.')
             if current_count > current_best_fit_value:
                 current_best_fit_value = current_count
                 current_best_fit = i
 
     print('Current best fit is a row of '+str(current_best_fit)+' characters, at '+str(current_best_fit_value)+' total matches')
+
+def factors(n):
+    return set(reduce(list.__add__, ([i, n//i] for i in range(1, int(n**0.5) + 1) if n % i == 0)))
 
 if __name__ == "__main__":
     main(sys.argv[1:])
