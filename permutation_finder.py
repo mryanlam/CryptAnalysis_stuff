@@ -2,7 +2,7 @@
 
 # Matthew Lam
 # Cryptography
-# Letter Frequency in python
+# Calculates the factors with the most possible common english words
 
 import os
 import sys
