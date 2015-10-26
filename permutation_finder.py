@@ -19,7 +19,7 @@ def main(argv):
         sys.exit(2)
     for opt, arg in opts:
         if opt == '-h':
-            print('test.py -i <inputfile> -o <outputfile>')
+            print('test.py -i <inputfile>')
             sys.exit()
         elif opt in ("-i", "--ifile"):
             inputfile = arg
@@ -34,8 +34,7 @@ def main(argv):
                     "HE", "FROM", "WHEN", "OTHER", "THAN", "BECAUSE", "LOOK",
                     "ONLY", "NEW", "COULD"]
 
-    current_best_fit = 0
-    current_best_fit_value = 0
+    best_fit_dic = {}
     with open(inputfile, "r") as fh:
         full_string = fh.read()
         factors_of_lenth = factors(len(full_string))
@@ -56,11 +55,10 @@ def main(argv):
                         current_count = current_count + 1
                 j = j + i
             print('.')
-            if current_count > current_best_fit_value:
-                current_best_fit_value = current_count
-                current_best_fit = i
+            best_fit_dic[i] = current_count
 
-    print('Current best fit is a row of '+str(current_best_fit)+' characters, at '+str(current_best_fit_value)+' total matches')
+    for key in sorted(freq_dict, key=best_fit_dic.get, reverse=True):
+        print(str(key)+","+str(best_fit_dic[key]))
 
 def factors(n):
     return set(reduce(list.__add__, ([i, n//i] for i in range(1, int(n**0.5) + 1) if n % i == 0)))
