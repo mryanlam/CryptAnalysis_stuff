@@ -40,24 +40,25 @@ def main(argv):
         factors_of_lenth = factors(len(full_string))
         print(factors_of_lenth)
         for i in factors_of_lenth:
-            print('testing length '+str(i))
-            num_substrings = len(full_string) / i
-            j = 0
-            current_count = 0
-            while ((j + i) < full_string):
-                row = full_string[j:(j+i)]
-                for word in common_words:
-                    word_in_string = True
-                    for character in word:
-                        if character not in row:
-                            word_in_string = False
-                    if word_in_string:
-                        current_count = current_count + 1
-                j = j + i
-            print('.')
-            best_fit_dic[i] = current_count
+            if i > 1:
+                print('testing length '+str(i))
+                num_substrings = len(full_string) / i
+                j = 0
+                current_count = 0
+                while ((j + i) < len(full_string)):
+                    row = full_string[j:(j+i)]
+                    for word in common_words:
+                        word_in_string = True
+                        for character in word:
+                            if character not in row:
+                                print(str(character)+' is not in '+str(row))
+                                word_in_string = False
+                        if word_in_string:
+                            current_count = current_count + 1
+                    j = j + i
+                best_fit_dic[i] = current_count
 
-    for key in sorted(freq_dict, key=best_fit_dic.get, reverse=True):
+    for key in sorted(best_fit_dic, key=best_fit_dic.get, reverse=True):
         print(str(key)+","+str(best_fit_dic[key]))
 
 def factors(n):
